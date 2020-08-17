@@ -11,3 +11,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.login-div {
+  display: block;
+  margin: auto;
+  width: 30%;
+  padding: 50px;
+  text-align: center;
+  background-color: azure;
+}
+
+.key-box {
+  display: inline-block;
+  width: 30%;
+  padding: 10px;
+}
+
+.value-box {
+  display: inline-block;
+  width: 60%;
+  padding: 10px;
+}
+
+.button-box {
+  display: block;
+  padding: 20px;
+  margin: auto;
+}
+
+.error-message {
+  color: red;
+}
