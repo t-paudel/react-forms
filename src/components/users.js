@@ -1,20 +1,28 @@
-import React from 'react'
+import React from 'react';
+import UserList from './UserList';
 
-const Users = ({users}) => {
-    return (
-        <div>
-            <center><h1>User List</h1></center>
-            {users.map((user) => (
-                <div class="card">
-                    <div class="card-body">
-                        <h5><p class="card-text">{user.first_name} {user.last_name}</p></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{user.email}</h6>
-                        <p class="card-text">{user.avatar}</p>
-                    </div>
-                </div>
-            ))}
-        </div>
-    )
-};
+class Users extends React.Component {
+    
+    state = {
+        userList: []
+    };
 
-export default Users
+    componentDidMount() {
+        fetch('https://reqres.in/api/users?page=2')
+            .then(res => res.json())
+            .then((data) => {
+                this.setState({ userList: data.data })
+            }).then(
+              console.log(this.state.userList)
+            )
+            .catch(console.log)
+    }
+
+    render() {
+      return (
+          <UserList users={this.state.userList} />
+      );
+    }
+}
+
+export default Users;

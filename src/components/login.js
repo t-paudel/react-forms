@@ -12,6 +12,9 @@ class Login extends React.Component {
     let name = event.target.name;
     let value = event.target.value;
     this.setState({[name]: value});
+    if(this.state.errorMessage) {
+      this.setState({errorMessage : ''});
+    }
   }
   
   mySubmitHandler = (event) => {
@@ -19,27 +22,30 @@ class Login extends React.Component {
     let error = '';
     if(this.state.username !== "admin" || this.state.password !== "admin") {
       error = "Invalid credentials";
+      this.setState({errorMessage : error});
     }
-    this.setState({errorMessage : error});
+    else {
+        this.props.history.push("/dashboard");
+    }
   }
 
   render() {
     return (
-      <div class="login-div">
+      <div className="login-div">
         <form onSubmit={this.mySubmitHandler}>
             <h1>Login/Sign Up</h1>
-            <div class="key-box">Username :</div>
-            <div class="value-box">
+            <div className="key-box">Username :</div>
+            <div className="value-box">
                 <input type="text" name='username' onChange={this.myChangeHandler}/>
             </div>
-            <div class="key-box">Password :</div>
-            <div class="value-box">
+            <div className="key-box">Password :</div>
+            <div className="value-box">
                 <input type="password" name='password' onChange={this.myChangeHandler}/>
             </div>
-            <div class="button-box">
+            <div className="button-box">
                 <button type="submit">Login</button>
             </div>
-            <div class="error-message">{this.state.errorMessage}</div>
+            <div className="error-message">{this.state.errorMessage}</div>
         </form>
       </div>
     );
