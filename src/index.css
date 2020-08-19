@@ -44,12 +44,17 @@ code {
 }
 
 .card {
-  display: block;
-  width: 90%;
-  border-left: 5px solid rebeccapurple;;
-  padding: 20px;
+  display: inline-block;
+  width: 45%;
+  border-left: 5px solid rebeccapurple;
+  padding: 10px;
   margin: 20px;
   background-color: aliceblue;
+}
+
+.card:hover {
+  background-color: aqua;
+  cursor: pointer;
 }
 .card-body {
   display: block;

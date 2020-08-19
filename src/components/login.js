@@ -25,7 +25,7 @@ class Login extends React.Component {
       this.setState({errorMessage : error});
     }
     else {
-        this.props.history.push("/dashboard");
+        this.props.history.push("/list-of-users");
     }
   }
 
