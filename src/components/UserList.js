@@ -5,12 +5,15 @@ class UserList extends React.Component {
 
     constructor(props_users) {
         super(props_users);
+
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
 
         this.state = { 
                         dataPointer: 1,
-                        userList: []
+                        userList: [],
+                        previous:true,
+                        next:false
                     };
       }
 
@@ -26,7 +29,7 @@ class UserList extends React.Component {
         fetch('https://reqres.in/api/users?page='+pointer)
             .then(res => res.json())
             .then((data) => {
-                this.setState({ userList: data.data })
+                this.setState({ userList: data.data })  
             })
             .catch(console.log)
     }
@@ -37,30 +40,33 @@ class UserList extends React.Component {
         let x = this.state.dataPointer - 1;
         this.state.dataPointer = x;
         this.getUserList(this.state.dataPointer);
+        if(x > 1) {
+            this.state.previous = false;
+            this.state.next = false;
+        }
+        if(x===2) {
+             this.state.next = true;
+        }
     }
-
 
     next() {
         console.log('UserList::next()');
 
-        console.log("before update = " + this.state.dataPointer);
         let x = this.state.dataPointer + 1;
-        console.log(x);
         this.state.dataPointer = x;
-        console.log("after update = " + this.state.dataPointer);
         this.getUserList(this.state.dataPointer);
+        if(x===2) {
+            this.state.next = true;
+        }
+        if(x>1) {
+            this.state.previous = false;
+        }
     }
 
     getUser(id) {
         console.log('UserList::getUser() = ' + id);
 
-        fetch('https://reqres.in/api/users/'+id)
-            .then(res => res.json())
-            .then((data) => {
-                this.test(data);
-            })
-            .catch(console.log)
-        
+        this.props.history.push("/list-of-users/" + id);
     }
 
     test(data) {
@@ -74,7 +80,6 @@ class UserList extends React.Component {
         console.log('UserList::render()');
 
         return (
-            //  <UserList users={this.state.userList} />
             <div>
                 <div>
                     <center><h1>User List</h1></center>
@@ -88,8 +93,8 @@ class UserList extends React.Component {
                     ))}
                 </div>
                 <div>
-                    <button onClick={this.previous} >Previous</button>
-                    <button onClick={this.next}>Next</button>
+                    <button onClick={this.previous} disabled={this.state.previous} >Previous</button>
+                    <button onClick={this.next} disabled={this.state.next}>Next</button>
                 </div>
             </div>             
     );

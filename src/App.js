@@ -16,7 +16,7 @@ class App extends Component {
               <Route exact path="/" component={Login} />
               <Route path="/login" component={Login} />
               <Route exact path="/list-of-users" component={UserList} />
-              <Route path="/list-of-users/user" component={Users} />
+              <Route path="/list-of-users/:id" component={Users} />
             </Switch>
           </div>
         </BrowserRouter>
