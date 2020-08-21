@@ -34,7 +34,7 @@ class Users extends React.Component {
         if(this.state.user) {
             return (
                 <div>
-                    <div className="card">
+                    <div className="user-box">
                         <div className="card-body">
                             <div className="card-text">
                                 <h1>{this.state.user.data.first_name} {this.state.user.data.last_name}</h1>
@@ -48,7 +48,6 @@ class Users extends React.Component {
                                 <h3>URL : {this.state.user.ad.url}</h3>
                                 <h3>{this.state.user.ad.text}</h3>
                             </div>
-                            
                         </div>
                     </div>
                 </div>             
