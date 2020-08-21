@@ -29,24 +29,36 @@ class Users extends React.Component {
             .catch(console.log)
     }
     render() {
-        console.log('UserList::render()' , this.state, this.state.user);
-
-        return (
-            <div>
+        console.log('Users::render()')
+        ;
+        if(this.state.user) {
+            return (
                 <div>
-                    complete JSON = {JSON.stringify(this.state.user)}<br/><br/>
-                    data = {JSON.stringify(this.state.user.data)} <br/><br/>
-                    ad = {JSON.stringify(this.state.user.ad)}
-                    {/* {this.state.user.data.email} */}
-                    {/* <div>
+                    <div className="card">
                         <div className="card-body">
-                            <div className="card-text"><h1>{this.state.user.data.first_name} {this.state.user.data.last_name}</h1></div>
+                            <div className="card-text">
+                                <h1>{this.state.user.data.first_name} {this.state.user.data.last_name}</h1>
+                            </div>
                             <div className="card-text"><img className="round-image" src={this.state.user.data.avatar}></img></div>
                         </div>
-                    </div> */}
-                </div>
-            </div>             
-        );
+
+                        <div className="card-body">
+                            <div className="card-text">
+                                <h3>Company : {this.state.user.ad.company}</h3>
+                                <h3>URL : {this.state.user.ad.url}</h3>
+                                <h3>{this.state.user.ad.text}</h3>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>             
+            );
+        }
+        else{
+            return (
+                <div></div>
+            );
+        }
     }
 }
 
