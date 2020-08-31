@@ -28,9 +28,14 @@ class Users extends React.Component {
             })
             .catch(console.log)
     }
+
+    clickedOnImage(id) {
+        console.log('User::clickedOnImage ', id);
+    }
+
     render() {
-        console.log('Users::render()')
-        ;
+        console.log('Users::render()');
+        
         if(this.state.user) {
             return (
                 <div>
@@ -39,7 +44,10 @@ class Users extends React.Component {
                             <div className="card-text">
                                 <h1>{this.state.user.data.first_name} {this.state.user.data.last_name}</h1>
                             </div>
-                            <div className="card-text"><img className="round-image" src={this.state.user.data.avatar}></img></div>
+                            <div className="card-text">
+                                <img className="round-image" src={this.state.user.data.avatar} 
+                                    onClick={()=>this.clickedOnImage(this.state.user.data.first_name)}></img>
+                            </div>
                         </div>
 
                         <div className="card-body">

@@ -72,3 +72,17 @@ code {
   margin: 20px;
   background-color: aliceblue;
 }
+
+.show-div {
+  padding: 10px;
+  margin: 0 auto;
+  border-left: solid 5px blue;
+  display: inline-block;
+  width: 50%;
+  background-color: lightskyblue;
+}
+
+.show-div:hover {
+  background-color: aqua;
+  cursor: pointer;
+}
