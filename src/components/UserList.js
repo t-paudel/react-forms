@@ -1,5 +1,6 @@
 import React from 'react';
 import Users from './users';
+import ReactTooltip from "react-tooltip";
 
 class UserList extends React.Component {
 
@@ -13,7 +14,9 @@ class UserList extends React.Component {
                         dataPointer: 1,
                         userList: [],
                         previous:true,
-                        next:false
+                        next:false,
+                        mouseOver: false,
+                        currentUserMail : ''
                     };
       }
 
@@ -64,18 +67,38 @@ class UserList extends React.Component {
     }
 
     getUser(id) {
-        console.log('UserList::getUser() = ' + id);
+        console.log('UserList::getUser()');
 
         this.props.history.push("/list-of-users/" + id);
     }
 
-    test(data) {
-        console.log('test');
-        return (
-            <Users user={data} />
-        );
+    mouseEnter(id){
+        console.log('UserList::mouseEnter()');
+        this.state.mouseOver = true;
+        console.log(this.state.mouseOver);
+    }
+    mouseLeave(id){
+        console.log('UserList::mouseLeave()');
+        this.state.mouseOver = false;
+        console.log(this.state.mouseOver);
     }
 
+    // render() {
+    //     console.log('UserList::render');
+
+    //     return (
+    //         <div>
+    //             <button onMouseEnter={() => this.setState({mouseOver:true})} onMouseLeave={() => this.setState({mouseOver:false})}>
+    //                 Hover over me!
+    //             </button>
+    //             {this.state.mouseOver && (
+    //             <div>
+    //                 I'll appear when you hover over the button.
+    //                 </div>
+    //             )}
+    //         </div>
+    //     );
+    // }
     render() {
         console.log('UserList::render()');
 
@@ -83,11 +106,28 @@ class UserList extends React.Component {
             <div>
                 <div>
                     <center><h1>User List</h1></center>
+                    {/* <button data-tip data-for="registerTip">
+                        Register
+                    </button>
+                    <ReactTooltip id="registerTip" place="top" effect="solid">
+                        Tooltip for the register button
+                    </ReactTooltip> */}
+
+
                     {this.state.userList.map((user) => (
-                        <div className="card" onClick={()=>this.getUser(user.id)}>
+                        <div className="card" onClick={()=>this.getUser(user.id)} 
+                            onMouseEnter={()=>this.setState({mouseOver:true, currentUserMail:user.email})}
+                            onMouseLeave={()=>this.setState({mouseOver:false, currentUserMail:user.email})}>
                             <div className="card-body">
                                 <div className="card-text"><h1>{user.first_name} {user.last_name}</h1></div>
-                                <div className="card-text"><img className="round-image" src={user.avatar}></img></div>
+                                <div className="card-text" data-tip data-for="registerTip"><img className="round-image" src={user.avatar}></img></div>
+                                {/* <div className="card-text"> {this.state.mouseOver ? (<div> Hello</div>) : (<div>123</div>)}  </div> */}
+                                {this.state.mouseOver && (
+                                    // <div>{user.email}</div>
+                                    <ReactTooltip id="registerTip" place="top" effect="solid">
+                                        {this.state.currentUserMail}
+                                    </ReactTooltip>
+                                )}
                             </div>
                         </div>
                     ))}
